@@ -1,9 +1,6 @@
-const Header = () => {
-  return (
-    <header>
-      <h1>Карточки слов</h1>
-    </header>
-  );
-};
+import './Header.css';
+
+
+const Header = () => <header className="header">🌿 Words App</header>;
 
 export default Header;

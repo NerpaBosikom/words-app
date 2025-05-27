@@ -1,10 +1,13 @@
+// src/components/WordCard.jsx
+import './WordCard.css';
+
 const WordCard = ({ word }) => {
   return (
     <div className="word-card">
-      <h3>{word.english}</h3>
-      <p>{word.transcription}</p>
-      <p>{word.russian}</p>
-      <p><em>{word.tags}</em></p>
+      <h2 className="word-title">{word.english}</h2>
+      <p><strong>Транскрипция:</strong> {word.transcription}</p>
+      <p><strong>Перевод:</strong> {word.russian}</p>
+      {word.tags && <p className="word-tags"><em>{word.tags}</em></p>}
     </div>
   );
 };

@@ -1,0 +1,36 @@
+.word-table {
+  width: 90%;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  background-color: var(--color-light);
+  font-family: var(--font-main);
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.word-row:hover {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+button {
+  margin-right: 0.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+}
+
+button:hover {
+  color: var(--color-secondary);
+}

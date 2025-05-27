@@ -1,0 +1,26 @@
+.word-card {
+  border: 1px solid var(--color-secondary);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 500px;
+  background-color: var(--color-light);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-main);
+  transition: transform 0.2s ease;
+}
+
+.word-card:hover {
+  transform: scale(1.02);
+}
+
+.word-title {
+  margin-top: 0;
+  color: var(--color-secondary);
+}
+
+.word-tags {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-accent);
+}
