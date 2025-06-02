@@ -24,16 +24,21 @@ const Home = () => {
       <main>
         {selectedWord ? (
           <>
-            <WordCard word={selectedWord} />
-            <button onClick={handleCloseCard}>Закрыть карточку</button>
+            <WordCard
+              word={selectedWord}
+              onClose={handleCloseCard}
+            />
           </>
         ) : (
-          <WordList words={words} onSelectWord={handleSelectWord} />
+          <WordList
+            words={words}
+            onSelectWord={handleSelectWord}
+          />
         )}
       </main>
       <Footer />
     </div>
-  );  
+  );
 };
 
 export default Home;

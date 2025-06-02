@@ -1,16 +1,35 @@
 // src/components/WordCard.jsx
-import './WordCard.css';
+import React, { useState } from "react";
+import "./WordCard.css";
 
-const WordCard = ({ word: { english, transcription, russian, tags } }) => {
+const WordCard = ({ word: { english, transcription, russian }, onClose }) => {
+  const [flipped, setFlipped] = useState(false);
+
+  const handleFlip = () => {
+    setFlipped(true);
+  };
+
   return (
-    <div className="word-card">
-      <h2 className="word-title">{english}</h2>
-      <p><strong>Транскрипция:</strong> {transcription}</p>
-      <p><strong>Перевод:</strong> {russian}</p>
-      {tags && <p className="word-tags"><em>{tags}</em></p>}
+    <div className="card-wrapper">
+      <div className={`card-container ${flipped ? "flipped" : ""}`}>
+        <div className="card">
+          <div className="front">
+            <h2 className="word">{english}</h2>
+            <p className="transcription">{transcription}</p>
+            {!flipped && (
+              <button className="show-btn" onClick={handleFlip}>
+                Показать перевод
+              </button>
+            )}
+          </div>
+          <div className="back">
+            <p className="translation">{russian}</p>
+          </div>
+        </div>
+        <button className="close-btn" onClick={onClose}>Закрыть карточку</button>
+      </div>
     </div>
   );
 };
-
 
 export default WordCard;
