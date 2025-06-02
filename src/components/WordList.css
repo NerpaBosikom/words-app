@@ -29,8 +29,26 @@ button {
   background: none;
   border: none;
   font-size: 1.1rem;
+  transition: color 0.3s ease;
 }
 
 button:hover {
   color: var(--color-secondary);
+}
+
+/* 🎯 Стили для input в таблице */
+input[type="text"] {
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 4px var(--color-secondary);
+  outline: none;
 }
