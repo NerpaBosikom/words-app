@@ -9,9 +9,27 @@
   --font-main: 'Segoe UI', sans-serif;
 }
 
-body {
+
+html, body, #root {
+  height: 100%;
   margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
   font-family: var(--font-main);
   background-color: var(--color-bg);
   color: var(--color-text);
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

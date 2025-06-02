@@ -19,7 +19,7 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div className="layout">
       <Header />
       <main>
         {selectedWord ? (
@@ -32,8 +32,8 @@ const Home = () => {
         )}
       </main>
       <Footer />
-    </>
-  );
+    </div>
+  );  
 };
 
 export default Home;
