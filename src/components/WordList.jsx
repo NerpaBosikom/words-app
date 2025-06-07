@@ -1,10 +1,11 @@
+// src/components/WordList.jsx
 import React, { useState } from "react";
 import './WordList.css';
 
 const WordList = ({ words, onSelectWord }) => {
   const [editingWordId, setEditingWordId] = useState(null);
   const [editedWord, setEditedWord] = useState({});
-  const [localWords, setLocalWords] = useState(words); // локальное хранилище слов
+  const [localWords, setLocalWords] = useState(words);
 
   const handleEdit = (word) => {
     setEditingWordId(word.id);
@@ -16,11 +17,11 @@ const WordList = ({ words, onSelectWord }) => {
     setEditedWord({});
   };
 
-  const handleChange = (e) => {
-    setEditedWord({
-      ...editedWord,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = ({ target: { name, value } }) => {
+    setEditedWord((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSave = () => {
@@ -43,9 +44,9 @@ const WordList = ({ words, onSelectWord }) => {
         </tr>
       </thead>
       <tbody>
-        {localWords.map((word) => (
-          <tr key={word.id} className="word-row">
-            {editingWordId === word.id ? (
+        {localWords.map(({ id, english, transcription, russian }) => (
+          <tr key={id} className="word-row">
+            {editingWordId === id ? (
               <>
                 <td>
                   <input
@@ -78,12 +79,12 @@ const WordList = ({ words, onSelectWord }) => {
               </>
             ) : (
               <>
-                <td className="word-cell">{word.english}</td>
-                <td className="word-cell">{word.transcription}</td>
-                <td className="word-cell">{word.russian}</td>
+                <td className="word-cell">{english}</td>
+                <td className="word-cell">{transcription}</td>
+                <td className="word-cell">{russian}</td>
                 <td className="word-cell">
-                  <button onClick={() => onSelectWord(word)}>📄</button>
-                  <button onClick={() => handleEdit(word)}>✏️</button>
+                  <button onClick={() => onSelectWord({ id, english, transcription, russian })}>📄</button>
+                  <button onClick={() => handleEdit({ id, english, transcription, russian })}>✏️</button>
                   <button>❌</button>
                 </td>
               </>
