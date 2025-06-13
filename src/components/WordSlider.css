@@ -1,0 +1,59 @@
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.counter {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #3c3c3c;
+}
+
+.arrow-btn {
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: #c3e7c1;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.arrow-btn:hover {
+  transform: scale(1.1);
+  background-color: #a6d3a2;
+}
+
+.message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 2rem;
+}
+
+.card-wrapper-with-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-fade-wrapper {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card-fade-wrapper.fade {
+  opacity: 0;
+  transform: translateY(10px);
+}

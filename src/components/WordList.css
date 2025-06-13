@@ -24,7 +24,6 @@ th {
 }
 
 button {
-  margin-right: 0.5rem;
   cursor: pointer;
   background: none;
   border: none;
@@ -33,7 +32,7 @@ button {
 }
 
 button:hover {
-  color: var(--color-secondary);
+  /* color: var(--color-secondary); */
 }
 
 /* 🎯 Стили для input в таблице */
