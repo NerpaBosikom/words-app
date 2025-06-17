@@ -1,6 +1,6 @@
 // src/components/WordList.jsx
 import React, { useState } from "react";
-import './WordList.css';
+import "./index.css";
 
 const WordList = ({ words, onSelectWord }) => {
   const [editingWordId, setEditingWordId] = useState(null);

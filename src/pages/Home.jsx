@@ -1,10 +1,10 @@
 // src/pages/Home.jsx
 import { useState } from "react";
-import WordList from "../components/WordList";
+import WordList from "../components/word/list";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import WordCard from "../components/WordCard";
-import WordSlider from "../components/WordSlider"; // ✅ добавили импорт
+import WordCard from "../components/word/card";
+import WordSlider from "../components/word/slider"; // ✅ добавили импорт
 import wordsData from "../data/words";
 
 const Home = () => {

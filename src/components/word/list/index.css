@@ -31,9 +31,9 @@ button {
   transition: color 0.3s ease;
 }
 
-button:hover {
-  /* color: var(--color-secondary); */
-}
+/* button:hover {
+  /* color: var(--color-secondary);
+} */
 
 /* 🎯 Стили для input в таблице */
 input[type="text"] {

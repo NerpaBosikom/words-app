@@ -1,6 +1,6 @@
 // src/components/WordCard.jsx
 import React, { useState } from "react";
-import "./WordCard.css";
+import "./index.css";
 
 const WordCard = ({ word, onClose }) => {
   const { english, transcription, russian } = word;
@@ -8,8 +8,8 @@ const WordCard = ({ word, onClose }) => {
 
   const handleFlip = () => setFlipped(prev => !prev);
 
-  const handleClose = (e) => {
-    e.stopPropagation();
+  const handleClose = (event) => {
+    event.stopPropagation();
     onClose?.();
   };
 
@@ -32,8 +32,8 @@ const WordCard = ({ word, onClose }) => {
             <p className="transcription">{transcription}</p>
             <button
               className="show-btn"
-              onClick={(e) => {
-                e.stopPropagation();
+              onClick={(event) => {
+                event.stopPropagation();
                 handleFlip();
               }}
             >

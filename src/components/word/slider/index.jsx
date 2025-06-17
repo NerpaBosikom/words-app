@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import WordCard from "./WordCard";
-import "./WordSlider.css";
+import WordCard from "../card";
+import "./index.css";
+;
 
 const WordSlider = ({ words = [], initialIndex = 0, onCloseCard }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
@@ -24,7 +25,7 @@ const WordSlider = ({ words = [], initialIndex = 0, onCloseCard }) => {
     handleSwitch(prevIndex);
   };
 
-  if (words.length === 0) {
+  if (!words.length) {
     return <p className="message">Слов пока нет 🫤</p>;
   }
 
