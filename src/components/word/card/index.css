@@ -38,11 +38,23 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   background: white;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  pointer-events: none; /* по умолчанию не кликабельны */
+}
+
+.card-container:not(.flipped) .front {
+  pointer-events: auto; /* активна только лицевая */
+}
+
+.card-container.flipped .back {
+  pointer-events: auto; /* активна только оборотная */
 }
 
 .back {
