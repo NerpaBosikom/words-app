@@ -1,31 +1,31 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import WordCard from "../card";
 import "./index.css";
 ;
 
-const WordSlider = ({ words = [], initialIndex = 0, onCloseCard }) => {
+const WordSlider = ({ words = [], initialIndex = 0 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [fade, setFade] = useState(false);
+  const navigate = useNavigate();
+
+  const total = words.length;
+  const word = words[currentIndex];
 
   const handleSwitch = (newIndex) => {
     setFade(true);
     setTimeout(() => {
       setCurrentIndex(newIndex);
       setFade(false);
-    }, 300); // должна совпадать с CSS
+    }, 300);
   };
 
-  const handleNext = () => {
-    const nextIndex = currentIndex < words.length - 1 ? currentIndex + 1 : 0;
-    handleSwitch(nextIndex);
-  };
+  const handleNext = () => handleSwitch((currentIndex + 1) % total);
+  const handlePrev = () => handleSwitch((currentIndex - 1 + total) % total);
 
-  const handlePrev = () => {
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : words.length - 1;
-    handleSwitch(prevIndex);
-  };
+  const handleClose = () => navigate("/");
 
-  if (!words.length) {
+  if (!total) {
     return <p className="message">Слов пока нет 🫤</p>;
   }
 
@@ -35,10 +35,10 @@ const WordSlider = ({ words = [], initialIndex = 0, onCloseCard }) => {
 
       <div className="card-wrapper-with-counter">
         <div className={`card-fade-wrapper ${fade ? "fade" : ""}`}>
-          <WordCard word={words[currentIndex]} onClose={onCloseCard} />
+          <WordCard word={word} onClose={handleClose} />
         </div>
         <div className="counter">
-          {currentIndex + 1} / {words.length}
+          {currentIndex + 1} / {total}
         </div>
       </div>
 
@@ -46,5 +46,6 @@ const WordSlider = ({ words = [], initialIndex = 0, onCloseCard }) => {
     </div>
   );
 };
+
 
 export default WordSlider;

@@ -1,16 +1,18 @@
-// src/pages/Home.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import WordList from "../components/word/list";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import WordCard from "../components/word/card";
-import WordSlider from "../components/word/slider"; // ✅ добавили импорт
 import wordsData from "../data/words";
 
 const Home = () => {
-  const [words, setWords] = useState(wordsData);
+  const [words] = useState(wordsData);
   const [selectedWord, setSelectedWord] = useState(null);
-  const [isTrainingMode, setIsTrainingMode] = useState(false); // ✅ новое состояние
+  const location = useLocation();
+
+  useEffect(() => {
+    // Когда заходим на главную — сбрасываем выбранное слово
+    setSelectedWord(null);
+  }, [location]);
 
   const handleSelectWord = (word) => {
     setSelectedWord(word);
@@ -20,35 +22,13 @@ const Home = () => {
     setSelectedWord(null);
   };
 
-  const toggleTrainingMode = () => {
-    setIsTrainingMode((prev) => !prev);
-    setSelectedWord(null); // сбрасываем выбор
-  };
-
   return (
-    <div className="layout">
-      <Header />
-      <main>
-        <div className="mode-toggle">
-          <button onClick={toggleTrainingMode}>
-            {isTrainingMode ? "Выйти из тренировки" : "Начать тренировку"}
-          </button>
-        </div>
-
-        {isTrainingMode ? (
-          <WordSlider
-            words={words}
-            initialIndex={0}
-            onCloseCard={() => setIsTrainingMode(false)} // выход из режима
-          />
-        ) : selectedWord ? (
-          <WordCard word={selectedWord} onClose={handleCloseCard} />
-        ) : (
-          <WordList words={words} onSelectWord={handleSelectWord} />
-        )}
-
-      </main>
-      <Footer />
+    <div>
+      {selectedWord ? (
+        <WordCard word={selectedWord} onClose={handleCloseCard} />
+      ) : (
+        <WordList words={words} onSelectWord={handleSelectWord} />
+      )}
     </div>
   );
 };
