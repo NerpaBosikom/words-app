@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import "./index.css";
 
-const WordCard = ({ word, onClose }) => {
-  const { english, transcription, russian } = word;
+const WordCard = ({ word: { english, transcription, russian }, onClose }) => {
   const [flipped, setFlipped] = useState(false);
 
-  const handleFlip = () => setFlipped(prev => !prev);
+  const handleFlip = () => setFlipped((prev) => !prev);
 
   const handleClose = (event) => {
     event.stopPropagation();
     onClose?.();
   };
+
+  const CloseButton = () => (
+    <button
+      className="close-icon-btn"
+      onClick={handleClose}
+      aria-label="Закрыть карточку"
+    >
+      &times;
+    </button>
+  );
 
   return (
     <div className="card-wrapper">
@@ -20,13 +29,7 @@ const WordCard = ({ word, onClose }) => {
       >
         <div className="card">
           <div className="front">
-            <button
-              className="close-icon-btn"
-              onClick={handleClose}
-              aria-label="Закрыть карточку"
-            >
-              &times;
-            </button>
+            <CloseButton />
             <h2 className="word">{english}</h2>
             <p className="transcription">{transcription}</p>
             <button
@@ -41,13 +44,7 @@ const WordCard = ({ word, onClose }) => {
           </div>
 
           <div className="back">
-            <button
-              className="close-icon-btn"
-              onClick={handleClose}
-              aria-label="Закрыть карточку"
-            >
-              &times;
-            </button>
+            <CloseButton />
             <p className="translation">{russian}</p>
           </div>
         </div>
