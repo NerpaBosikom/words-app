@@ -89,6 +89,15 @@
   cursor: pointer;
 }
 
+.show-btn:hover {
+  background-color: #81c784;
+}
+
+.show-btn:focus {
+  outline: 3px solid #1b5e20;
+  /* outline-offset: 2px; */
+}
+
 .close-icon-btn {
   position: absolute;
   top: 10px;
@@ -105,4 +114,9 @@
 .close-icon-btn:hover {
   color: #2e7d32;
   transform: scale(1.1);
+}
+
+.close-icon-btn:focus {
+  outline: 2px solid #2e7d32;
+  /* outline-offset: 2px; */
 }
