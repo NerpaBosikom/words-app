@@ -17,8 +17,8 @@ const WordCard = ({
   const showBtnRef = useRef(null);
 
   useEffect(() => {
-    showBtnRef.current?.focus(); // Фокус на кнопке при загрузке
-  }, []);
+    showBtnRef.current?.focus(); // Автофокус на кнопке
+  }, [resetTrigger]); // Добавили зависимость!
 
   useEffect(() => {
     setFlipped(false); // Сброс при смене карточки

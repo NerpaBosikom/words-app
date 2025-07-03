@@ -51,3 +51,15 @@ input[type="text"]:focus {
   box-shadow: 0 0 4px var(--color-secondary);
   outline: none;
 }
+
+input.input-error {
+  border: 1px solid red;
+  box-shadow: 0 0 5px red;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 4px 0;
+}
