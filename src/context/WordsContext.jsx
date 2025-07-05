@@ -26,19 +26,58 @@ export const WordsProvider = ({ children }) => {
   }, []);
 
   // Методы управления словами
-  const addWord = (newWord) => {
-    setWords((prev) => [...prev, newWord]);
+  const addWord = async (newWord) => {
+    try {
+      const res = await fetch("https://itgirlschool.justmakeit.ru/api/words/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newWord),
+      });
+      if (!res.ok) throw new Error("Ошибка при добавлении");
+  
+      const createdWord = await res.json();
+      setWords((prev) => [...prev, createdWord]);
+    } catch (err) {
+      console.error("Ошибка добавления:", err);
+      setError("Не удалось добавить слово");
+    }
   };
+  
 
-  const updateWord = (updatedWord) => {
-    setWords((prev) =>
-      prev.map((word) => (word.id === updatedWord.id ? updatedWord : word))
-    );
+  const updateWord = async (updatedWord) => {
+    try {
+      const res = await fetch(`https://itgirlschool.justmakeit.ru/api/words/${updatedWord.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedWord),
+      });
+      if (!res.ok) throw new Error("Ошибка при обновлении слова");
+  
+      const savedWord = await res.json(); // получаем слово с сервера
+      setWords((prev) =>
+        prev.map((word) => (word.id === savedWord.id ? savedWord : word))
+      );
+    } catch (err) {
+      console.error("Ошибка обновления:", err);
+      setError("Не удалось обновить слово");
+    }
   };
+  
 
-  const deleteWord = (id) => {
-    setWords((prev) => prev.filter((word) => word.id !== id));
+  const deleteWord = async (id) => {
+    try {
+      const res = await fetch(`https://itgirlschool.justmakeit.ru/api/words/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Ошибка при удалении");
+  
+      setWords((prev) => prev.filter((word) => word.id !== id));
+    } catch (err) {
+      console.error("Ошибка удаления:", err);
+      setError("Не удалось удалить слово");
+    }
   };
+  
 
   return (
     <WordsContext.Provider
