@@ -1,11 +1,14 @@
-// src/components/WordList.jsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { WordsContext } from "../../../context/WordsContext";
+import Loader from "../../Loader";
+import Error from "../../Error";
 import "./index.css";
 
-const WordList = ({ words, onSelectWord }) => {
+const WordList = ({ onSelectWord }) => {
+  const { words, loading, error, updateWord, deleteWord } = useContext(WordsContext);
+
   const [editingWordId, setEditingWordId] = useState(null);
   const [editedWord, setEditedWord] = useState({});
-  const [localWords, setLocalWords] = useState(words);
 
   const isFieldEmpty = (value) => value.trim() === "";
   const hasErrors = Object.values(editedWord).some(isFieldEmpty);
@@ -25,25 +28,18 @@ const WordList = ({ words, onSelectWord }) => {
   };
 
   const handleSave = () => {
-    // 1. Если есть хотя бы одно пустое поле — ничего не сохраняем
-    if (hasErrors) {
-      return;
-    }
-  
-    // 2. ✅ Если все поля заполнены — логируем в консоль
-    console.log("Сохранено слово:", editedWord);
-  
-    // 3. Сохраняем слово в локальный массив
-    const updatedWords = localWords.map((word) =>
-      word.id === editedWord.id ? editedWord : word
-    );
-    setLocalWords(updatedWords);
-  
-    // 4. Сброс состояния редактирования
+    if (hasErrors) return;
+    updateWord(editedWord);
     setEditingWordId(null);
     setEditedWord({});
   };
-  
+
+  const handleDelete = (id) => {
+    deleteWord(id);
+  };
+
+  if (loading) return <Loader />;
+  if (error) return <Error message={error} />;
 
   return (
     <table className="word-table">
@@ -56,7 +52,7 @@ const WordList = ({ words, onSelectWord }) => {
         </tr>
       </thead>
       <tbody>
-        {localWords.map((word) => {
+        {words.map((word) => {
           const { id, english, transcription, russian } = word;
           const isEditing = editingWordId === id;
 
@@ -103,15 +99,13 @@ const WordList = ({ words, onSelectWord }) => {
                     <td className="word-cell">{transcription}</td>
                     <td className="word-cell">{russian}</td>
                     <td className="word-cell">
-                      <button onClick={() => onSelectWord(word)}>📄</button>
+                      <button onClick={() => onSelectWord(word)}>📄</button> {/* Кнопка карточки */}
                       <button onClick={() => handleEdit(word)}>✏️</button>
-                      <button>❌</button>
+                      <button onClick={() => handleDelete(id)}>❌</button>
                     </td>
                   </>
                 )}
               </tr>
-
-              {/* Подсказка, если есть ошибка при редактировании */}
               {isEditing && hasErrors && (
                 <tr>
                   <td colSpan="4" className="error-message">
