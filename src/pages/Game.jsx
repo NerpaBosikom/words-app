@@ -1,10 +1,14 @@
-// src/pages/Game.jsx
-import { useState } from "react";
+import { useContext } from "react";
 import WordSlider from "../components/word/slider";
-import wordsData from "../data/words";
+import { WordsContext } from "../context/WordsContext";
+import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 const Game = () => {
-  const [words] = useState(wordsData);
+  const { words, loading, error } = useContext(WordsContext);
+
+  if (loading) return <Loader />;
+  if (error) return <Error message={error} />;
 
   return <WordSlider words={words} initialIndex={0} />;
 };
