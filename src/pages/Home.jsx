@@ -1,36 +1,39 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import wordStore from "../store/WordStore"; // импорт стора
 import WordList from "../components/word/list";
 import WordCard from "../components/word/card";
-import wordsData from "../data/words";
+import AddWordForm from "../components/word/form/AddWordForm";
 
-const Home = () => {
-  const [words] = useState(wordsData);
+const Home = observer(() => {
   const [selectedWord, setSelectedWord] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
-    // Когда заходим на главную — сбрасываем выбранное слово
     setSelectedWord(null);
   }, [location]);
 
-  const handleSelectWord = (word) => {
-    setSelectedWord(word);
-  };
+  // Загружаем слова при монтировании компонента
+  useEffect(() => {
+    wordStore.fetchWords();
+  }, []);
 
-  const handleCloseCard = () => {
-    setSelectedWord(null);
-  };
+  const handleSelectWord = (word) => setSelectedWord(word);
+  const handleCloseCard = () => setSelectedWord(null);
 
   return (
     <div>
       {selectedWord ? (
         <WordCard word={selectedWord} onClose={handleCloseCard} />
       ) : (
-        <WordList words={words} onSelectWord={handleSelectWord} />
+        <>
+          <AddWordForm />
+          <WordList words={wordStore.words} onSelectWord={handleSelectWord} />
+        </>
       )}
     </div>
   );
-};
+});
 
 export default Home;

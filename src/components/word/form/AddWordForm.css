@@ -1,0 +1,52 @@
+.add-word-form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 90%;
+  margin-bottom: 20px;
+  background: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.add-word-form__input {
+  flex: 1 1 120px; /* адаптивная ширина с минимумом 120px */
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.add-word-form__input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 5px #4caf50;
+}
+
+.add-word-form__button {
+  flex: 0 0 100px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+.add-word-form__button:hover {
+  background-color: #45a049;
+}
+
+.add-word-form__error {
+  width: 100%;
+  color: #d32f2f;
+  font-size: 13px;
+  margin-top: 8px;
+  font-weight: 600;
+}
